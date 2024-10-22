@@ -17,38 +17,30 @@ Installation
 
     Navigate to your Magic Mirror's `modules` directory and clone this repository:
 
-    bashCopy Code
-
-    `cd ~/MagicMirror/modules
-    git clone https://github.com/SLFaleiro/MMM-Halloween.git`
-
+     ```cd ~/MagicMirror/modules
+    git clone https://github.com/SLFaleiro/MMM-Halloween.git
 2.  Navigate to the Module Directory
 
-    bashCopy Code
-
-    `cd MMM-Halloween`
-
-3.  Install Dependencies
-
-    This module does not require any additional dependencies. Ensure your Magic Mirror is up to date.
-
-4.  Add to Magic Mirror Configuration
+     ```
+    cd MMM-Halloween
+3.  Add to Magic Mirror Configuration
 
     Open your `config.js` file in the Magic Mirror `config` directory and add the following configuration block:
-
    
 
-    ```{
+    ```
+    {
       module: "MMM-Halloween",
       position: "fullscreen_above",
       config: {
-                numberOfGhosts: 10, // Number of ghosts to display on the screen. Adjust this to increase or decrease the number of ghosts.
-                minSize: 100, // Minimum size (in pixels) of each ghost. This controls how small the smallest ghost can be.
-                maxSize: 400, // Maximum size (in pixels) of each ghost. This controls how large the largest ghost can be.
-                opacity: 0.35, // Opacity of the ghosts, ranging from 0 (completely transparent) to 1 (completely opaque). This makes the ghosts appear more or less transparent.
-                staticGif: "assets/images/jack.gif", // Path to a static GIF file to display, such as a jack-o'-lantern. Ensure this path is correct relative to the module's directory.
-                gifPosition: "bottom-left", // Position of the GIF on screen: "top-left", "top-right", "bottom-left", "bottom-right", "center", "top-center", "bottom-center", "left-center", "right-center"
-                gifSize: 150 // Size (in pixels) of the static GIF. Adjust this to make the GIF larger or smaller on the screen.
+                numberOfGhosts: 10,
+                updateInterval: 1000 * 99999,
+                minSize: 100,
+                maxSize: 400,
+                opacity: 0.35,
+                staticGif: "assets/images/jack.gif",
+                gifPosition: "bottom-left",
+                gifSize: 150 
       }
     }
 
@@ -60,7 +52,7 @@ Configuration Options
 -   maxSize: (integer) Maximum size (in pixels) of the ghosts.
 -   opacity: (float) Opacity of the ghosts (0 to 1).
 -   staticGif: (string) Path to a static GIF to display, e.g., a jack-o'-lantern.
--   gifPosition: (string) Position of the static GIF on the screen (e.g., "bottom-left", "bottom-right").
+-   gifPosition: (string) Position of the static GIF on the screen (e.g., ""top-left", "top-right", "bottom-left", "bottom-right", "center", "top-center", "bottom-center", "left-center", "right-center"").
 -   gifSize: (integer) Size (in pixels) of the static GIF.
 
 Usage
