@@ -1,0 +1,55 @@
+.halloween-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.ghost {
+    position: absolute;
+    background: url('assets/images/ghost.png') no-repeat center;
+    background-size: contain;
+    animation: floatIntoView linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatIntoView {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(var(--translateX), var(--translateY), 0); }
+}
+
+.static-gif {
+    position: absolute;
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.static-gif.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.static-gif.top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.static-gif.bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.static-gif.bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
+
+.static-gif.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
