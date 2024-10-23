@@ -69,7 +69,7 @@ Start your Magic Mirror to see the ghosts in action. They will randomly float ac
 License
 -------
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the GNU General Public License v2.0. You are free to use, modify, and distribute this software under the terms of the GPL. See the LICENSE file for details.
 
 Support
 -------
