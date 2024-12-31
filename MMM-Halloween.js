@@ -7,7 +7,9 @@ Module.register("MMM-Halloween", {
         opacity: 0.8, // Default opacity of the ghosts
         staticGif: "assets/images/jack.gif", // Path to the static GIF
         gifPosition: "top-right", // Options: "top-left", "top-right", "bottom-left", "bottom-right", "center"
-        gifSize: 100 // Default size of the static GIF
+        gifSize: 100, // Default size of the static GIF
+        minSpeed: 15, // Minimum duration of the ghost animation in seconds
+        maxSpeed: 25  // Maximum duration of the ghost animation in seconds
     },
 
     getStyles: function() {
@@ -70,7 +72,8 @@ Module.register("MMM-Halloween", {
             ghost.style.setProperty('--translateX', `${translateX}vw`);
             ghost.style.setProperty('--translateY', `${translateY}vh`);
 
-            const duration = Math.random() * 10 + 15; // Between 15 and 25 seconds
+            // Calculate duration based on minSpeed and maxSpeed
+            const duration = Math.random() * (this.config.maxSpeed - this.config.minSpeed) + this.config.minSpeed;
             ghost.style.animationDuration = `${duration}s`;
             ghost.style.animationDelay = `${Math.random() * 5}s`; // Between 0 and 5 seconds
             ghost.style.opacity = this.config.opacity;
