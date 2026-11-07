@@ -9,7 +9,7 @@
     z-index: 10;
 }
 
-.ghost {
+.particle {
     position: absolute;
     /* background: url('assets/images/ghost.png') no-repeat center; */
 	/* Bat adddition */
@@ -29,6 +29,7 @@
     position: absolute;
     pointer-events: auto;
     z-index: 20;
+	width: auto; /* maintain aspect ratio for image in magic mirror */
 }
 
 .static-gif.top-left {
