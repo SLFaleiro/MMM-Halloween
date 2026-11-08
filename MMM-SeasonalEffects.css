@@ -1,4 +1,4 @@
-.halloween-wrapper {
+.seasonal-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -12,17 +12,71 @@
 .particle {
     position: absolute;
     /* background: url('assets/images/ghost.png') no-repeat center; */
-	/* Bat adddition */
-	/* TODO, make variables for different options like .ghost above*/
-	background: url('assets/images/cute-bat-3.png') no-repeat center;
-    background-size: contain;
-    animation: floatIntoView linear infinite;
+	/* background: url('assets/images/cute-bat-3.png') no-repeat center; */
+    /* background-size: contain; */
+    /* animation: floatIntoView linear infinite; */ 
     opacity: 0.8;
+}
+
+/* 
+  TYPE A: Mask-based particles (Leaves)
+  They use the white stencil PNG and fill it with --particle-color.
+  If --particle-color isn't set, it falls back to a clean white (#ffffff).
+*/
+.particle.leaf {
+	mask-image: url('assets/images/leaf_1.png');
+    background-color: var(--particle-color, #ffffff);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;	
+}
+
+/* Animation style settings for leaf and snow   */
+.particle.leaf,
+.particle.snow {
+	animation: fallAndSway linear infinite;
+}
+
+/* 
+  TYPE B: Native-color asset particles (Bats, Ghosts, Snow)
+  They use their own multi-colored images and completely ignore color variables.
+*/
+.particle.bat,
+.particle.snow {
+    background: url('assets/images/cute-bat-3.png') no-repeat center;
+    background-size: contain;
+	/* TODO add logid for ghosts and snow */
+}
+
+.particle.ghost {
+	background: url('assets/images/ghost.png') no-repeat center;
+	background-size: contain;
+}
+
+.particle.bat,
+.particle.ghost {
+	animation: floatAcross linear infinite;
 }
 
 @keyframes floatIntoView {
     0% { transform: translate3d(0, 0, 0) rotate(var(--rotation, 0deg)); }
     100% { transform: translate3d(var(--translateX), var(--translateY), 0) rotate(var(--rotation, 0deg)); }
+}
+
+/* Define the leaf or snow falling and swaying keyframes */
+@keyframes fallAndSway {
+    0% { 
+        transform: translate3d(0, 0, 0) rotate(var(--rotation, 0deg)); 
+    }
+    33% { 
+        transform: translate3d(calc(var(--translateX) * 0.3), calc(var(--translateY) * 0.33), 0) rotate(calc(var(--rotation) + 20deg)); 
+    }
+    66% { 
+        transform: translate3d(calc(var(--translateX) * 0.8), calc(var(--translateY) * 0.66), 0) rotate(calc(var(--rotation) - 20deg)); 
+    }
+    100% { 
+        transform: translate3d(var(--translateX), var(--translateY), 0) rotate(calc(var(--rotation) + 10deg)); 
+    }
 }
 
 .static-gif {

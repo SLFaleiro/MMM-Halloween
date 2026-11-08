@@ -2,18 +2,22 @@ Module.register("MMM-SeasonalEffects", {
     defaults: {
         updateInterval: 1000 * 30, // Update every 30 seconds
         numberOfParticles: 10, // Number of individual entities to display
-        minSize: 100, // Minimum size of the particles
-        maxSize: 400, // Maximum size of the particles
+        minSize: 30, // Minimum size of the particles
+        maxSize: 400, // Maximum size of the particles - this is big, shrink in config if desired
         opacity: 0.8, // Default opacity of the Entities
         staticGif: "assets/images/jack.gif", // Path to the static GIF
         gifPosition: "top-right", // Options: "top-left", "top-right", "bottom-left", "bottom-right", "center"
         gifHeight: 100, // Default size of the static GIF
         minSpeed: 15, // Minimum duration of the particle animation in seconds
         maxSpeed: 25,  // Maximum duration of the particle animation in seconds
+		minRotation: -30,    // Minimum random initial tilt (degrees)
+		maxRotation: 30,     // Maximum random initial tilt (degrees)
+		imageOffset: 0,     // Static offset correction for your asset's default angle (degrees)
 
-	minRotation: -30,    // Minimum random initial tilt (degrees)
-	maxRotation: 30,     // Maximum random initial tilt (degrees)
-	imageOffset: 0,     // Static offset correction for your asset's default angle (degrees)
+		// Adding leaves
+		particleType: "bat", // options include "leaf", "bat", "ghost"
+		particleColors: [] // none.  If added in user config, it'll cycle through
+		// particleColors: ["#d97706", "#b45309", "#78350f", "#dc2626", "#eab308"] // Autumn colors
 
     },
 
@@ -34,17 +38,31 @@ Module.register("MMM-SeasonalEffects", {
 
     getDom: function() {
         const wrapper = document.createElement("div");
-        wrapper.className = "halloween-wrapper";
+        wrapper.className = "seasonal-wrapper";
 
         for (let i = 0; i < this.config.numberOfParticles; i++) {
             const particle = document.createElement("div");
-            particle.className = "particle";
+			// Extensible class naming
+			particle.className = `particle ${this.config.particleType}`;
+            // particle.className = "particle";
 
             const size = Math.random() * (this.config.maxSize - this.config.minSize) + this.config.minSize;
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
 
-            const side = Math.floor(Math.random() * 4);
+			// Only apply dynamic color if the user configured a color array
+			if (this.config.particleColors && this.config.particleColors.length > 0) {
+    			const randomColor = this.config.particleColors[Math.floor(Math.random() * 	this.config.particleColors.length)];
+    			particle.style.setProperty('--particle-color', randomColor);
+			}			
+
+            let side = Math.floor(Math.random() * 4);
+
+			// Force top-only spawning for leaves and ghosts
+			if (this.config.particleType === "leaf" || this.config.particleType === "snow") {
+    			side = 2; 
+			}
+
             let translateX, translateY;
 
             switch (side) {
