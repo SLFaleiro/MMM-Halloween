@@ -1,28 +1,34 @@
-MMM-Halloween
-=============
+MMM-SeasonalEffects
+===================
 
-MMM-Halloween is a Magic Mirror module that adds a spooky Halloween theme to your Magic Mirror display by animating ghosts across the screen. Customize the number of ghosts, their size, speed, and opacity to create the perfect Halloween atmosphere.
+MMM-SeasonalEffects is an extensible MagicMirror module that brings dynamic particle effects and atmospheric visuals to your mirror display. Supporting leaves, snowflakes, bats, and ghosts, it features customizable spawn points, distinct physics animations (falling/swaying vs. floating), dynamic visual coloring via SVG stencils, and static ambient overlays.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/SLFaleiro/MMM-Halloween/main/screenshot.gif" alt="Halloween GIF">
+  <img src="https://github.com/jonellm/MMM-SeasonalEffects/main/screenshot.gif" alt="Halloween GIF">
 </p>
 
 Version
 --------
-**Current Version**: 1.2
+**Current Version**: 2.0
 
 Updates
 --------
 
-Version 1.2**: Added configurable minimum and maximum speed settings for ghost animations.
+**Version 2.0**:
+- Renamed from `MMM-Halloween` to `MMM-SeasonalEffects` to support year-round seasonal animations.
+- Added support for multiple particle types (`leaf`, `snow`, `bat`, `ghost`).
+- Added stencil-based dynamic color palette cycling (`particleColors`) using CSS mask styling.
+- Implemented physics groups: top-spawning with sway/drift (`leaf`, `snow`) vs. 4-side screen floating (`bat`, `ghost`).
+- Refactored rotation and drift controls via standard CSS variables.
 
 Features
 --------
 
--   Display multiple animated ghosts floating across the screen.
--   Customize ghost appearance with adjustable size, speed, and opacity.
--   Control ghost speed with configurable minimum and maximum speed settings.
--   Add a static GIF (e.g., a jack-o'-lantern) to the display for extra ambiance.
+- **Multi-Particle Support**: Animate falling autumn leaves, snow, floating bats, or haunting ghosts.
+- **Dynamic Palette Coloring**: Apply dynamic color arrays to mask stencils (leaves/snow) or use native image colors (bats/ghosts).
+- **Physics Engine**: Top-only spawning with organic leaf sway/fall animations alongside traditional multi-directional floating paths.
+- **Configurable Dynamics**: Control size ranges, particle counts, animation speeds, opacity, and rotation angles.
+- **Ambient Overlay**: Display fixed static images or GIFs (such as a jack-o'-lantern or holiday icon) in designated screen corners.
 
 Installation
 ------------
@@ -32,11 +38,11 @@ Installation
     Navigate to your Magic Mirror's `modules` directory and clone this repository:
 
      ```cd ~/MagicMirror/modules
-    git clone https://github.com/SLFaleiro/MMM-Halloween.git
+    git clone https://github.com/jonellm/MMM-SeasonalEffects.git
 2.  Navigate to the Module Directory
 
      ```
-    cd MMM-Halloween
+    cd MMM-SeasonalEffects
 3.  Add to Magic Mirror Configuration
 
     Open your `config.js` file in the Magic Mirror `config` directory and add the following configuration block:
@@ -44,49 +50,56 @@ Installation
 
     ```
     {
-      module: "MMM-Halloween",
+      module: "MMM-SeasonalEffects",
       position: "fullscreen_above",
       config: {
-                numberOfGhosts: 10,
-                updateInterval: 1000 * 99999,
-                minSize: 100,
-                maxSize: 400,
-                opacity: 0.35,
-                staticGif: "assets/images/jack.gif",
-                gifPosition: "bottom-left",
-                gifSize: 150,
-                minSpeed: 15,
-                maxSpeed: 25
-      }
+                particleType: "leaf",
+    			numberOfParticles: 10,
+    			particleColors: ["#d97706", "#b45309", "#78350f", "#dc2626", "#eab308"],
+    			minSize: 30,
+    			maxSize: 150,
+    			opacity: 0.8,
+   				minSpeed: 15,
+    			maxSpeed: 25,
+    			minRotation: -30,
+				maxRotation: 30,
+				imageOffset: 0,
+    			staticGif: "assets/images/jack.gif",
+    			gifPosition: "bottom-left",
+    			gifHeight: 100,
+    			updateInterval: 1000 * 30
+      	}
     }
 
 Configuration Options
 ---------------------
 
--   numberOfGhosts: (integer) Number of ghosts to display on the screen.
+-   numberOfParticles: (integer) Number of items to display on the screen.
+-	particleTyle: (string) Type of particle effect: "Leaf", "ghost", "bat"
+-	particleColors: (array) Array of CSS color hex codes for stencil particles. If empty, default of clean white will be used (#ffffff)
 -   minSize: (integer) Minimum size (in pixels) of the ghosts.
 -   maxSize: (integer) Maximum size (in pixels) of the ghosts.
 -   opacity: (float) Opacity of the ghosts (0 to 1).
 -   staticGif: (string) Path to a static GIF to display, e.g., a jack-o'-lantern.
 -   gifPosition: (string) Position of the static GIF on the screen (e.g., ""top-left", "top-right", "bottom-left", "bottom-right", "center", "top-center", "bottom-center", "left-center", "right-center"").
--   gifSize: (integer) Size (in pixels) of the static GIF.
--   minSpeed: (integer) Minimum speed (in seconds) for the ghosts to complete their animation across the screen.
--   maxSpeed: (integer) Maximum speed (in seconds) for the ghosts to complete their animation across the screen.
+-   gifHeight: (integer) Height (in pixels) of the static GIF. Native aspect ratio is maintained.
+-   minSpeed: (integer) Minimum speed (in seconds) for the particles to complete their animation across the screen.
+-   maxSpeed: (integer) Maximum speed (in seconds) for the particles to complete their animation across the screen.
 
 
 Updating the Plugin
 -----
 
-To update the MMM-Halloween module to the latest version, navigate to the module's directory and pull the latest changes from the repository:
+To update the MMM-SeasonalEffects module to the latest version, navigate to the module's directory and pull the latest changes from the repository:
 
-    cd ~/MagicMirror/modules/MMM-Halloween
+    cd ~/MagicMirror/modules/MMM-SeasonalEffects
     git pull
 
 
 Usage
 -----
 
-Start your Magic Mirror to see the ghosts in action. They will randomly float across the screen according to the parameters you have set in the configuration.
+Start your Magic Mirror to see the effects in action. They will randomly float across the screen according to the parameters you have set in the configuration.
 
 License
 -------
